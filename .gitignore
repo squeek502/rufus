@@ -53,3 +53,5 @@ embedded.loc
 /rufus_files
 stamp-h1
 /.vs/rufus
+zig-cache
+zig-out
