@@ -24,7 +24,7 @@
 #if defined(RUFUS_MSC_VERSION)
 #include <intrin.h>
 #elif (defined(RUFUS_GCC_VERSION) || defined(RUFUS_CLANG_VERSION))
-#include <x86Intrin.h>
+#include <x86intrin.h>
 #elif defined(RUFUS_INTEL_VERSION)
 #include <immintrin.h>
 #endif
@@ -71,7 +71,7 @@ BOOL DetectSHA1Acceleration(void)
 	return (regs1[2] /*ECX*/ & SSSE3_BIT) && (regs1[2] /*ECX*/ & SSE41_BIT) && (regs7[1] /*EBX*/ & SHA_BIT) ? TRUE : FALSE;
 #elif defined(__GNUC__) || defined(__clang__)
 	/* __builtin_cpu_supports available in GCC 4.8.1 and above */
-	return __builtin_cpu_supports("ssse3") && __builtin_cpu_supports("sse4.1") && __builtin_cpu_supports("sha") ? TRUE : FALSE;
+	return FALSE; //__builtin_cpu_supports("ssse3") && __builtin_cpu_supports("sse4.1") && __builtin_cpu_supports("sha") ? TRUE : FALSE;
 #elif defined(__INTEL_COMPILER)
 	/* https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_may_i_use_cpu_feature */
 	return _may_i_use_cpu_feature(_FEATURE_SSSE3|_FEATURE_SSE4_1|_FEATURE_SHA) ? TRUE : FALSE;
@@ -110,7 +110,7 @@ BOOL DetectSHA256Acceleration(void)
 	return (regs1[2] /*ECX*/ & SSSE3_BIT) && (regs1[2] /*ECX*/ & SSE41_BIT) && (regs7[1] /*EBX*/ & SHA_BIT) ? TRUE : FALSE;
 #elif defined(__GNUC__) || defined(__clang__)
 	/* __builtin_cpu_supports available in GCC 4.8.1 and above */
-	return __builtin_cpu_supports("ssse3") && __builtin_cpu_supports("sse4.1") && __builtin_cpu_supports("sha") ? TRUE : FALSE;
+	return FALSE; //__builtin_cpu_supports("ssse3") && __builtin_cpu_supports("sse4.1") && __builtin_cpu_supports("sha") ? TRUE : FALSE;
 #elif defined(__INTEL_COMPILER)
 	/* https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#text=_may_i_use_cpu_feature */
 	return _may_i_use_cpu_feature(_FEATURE_SSSE3|_FEATURE_SSE4_1|_FEATURE_SHA) ? TRUE : FALSE;
